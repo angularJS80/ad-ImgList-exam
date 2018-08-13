@@ -3,6 +3,7 @@ package com.unbone.corp.imglisttry;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.ViewGroup;
 
 
@@ -14,6 +15,8 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     RecyclerView recView;
     RecViewAdapter recViewAdapter ;
+
+
     ArrayList<ImgItem> arrayList = new ArrayList();
 
 
@@ -21,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        defineData();
-        testData();
         defineView();
 
+
+        //testData();
+
+        defineData();
         defineProc();
 
     }
@@ -77,8 +80,17 @@ public class MainActivity extends AppCompatActivity {
 
         recViewAdapter = new RecViewAdapter();
         recViewAdapter.setArrayList(arrayList);
-        recView.setAdapter(recViewAdapter);
+
+
+        recView.setAdapter(
+                recViewAdapter
+        );
+
+        // 차주 설명
+        recView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+
     }
+
 
 
 }
