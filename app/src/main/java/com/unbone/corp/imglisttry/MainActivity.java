@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
         ImgItem imgIitem = new ImgItem();
         imgIitem.setImgSubject("김화가 1작품");
-        imgIitem.setImgUrl("http://naver/2~.jpg");
+        imgIitem.setImgUrl("");
 
         arrayList.add(imgIitem);
 
         imgIitem = new ImgItem();
-        imgIitem.setImgSubject("김화가 1작품");
-        imgIitem.setImgUrl("http://naver/2~.jpg");
+        imgIitem.setImgSubject("메트릭스");
+        imgIitem.setImgUrl("https://f4.bcbits.com/img/a2045320818_16.jpg");
         arrayList.add(imgIitem);
 
 
@@ -81,6 +81,17 @@ public class MainActivity extends AppCompatActivity {
         recViewAdapter = new RecViewAdapter();
         recViewAdapter.setArrayList(arrayList);
 
+
+
+FireBaseModel fireBaseModel = new FireBaseModel();
+fireBaseModel.fireBaseNoneAuth();
+
+ImgItem imgItem = new ImgItem();
+        imgItem.setImgUrl("http://123456.jpg");
+        imgItem.setImgSubject("artist0101");
+        fireBaseModel.addData(imgItem);
+
+fireBaseModel.getImgList();
 
         recView.setAdapter(
                 recViewAdapter

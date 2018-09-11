@@ -125,11 +125,36 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewHolder>{
         Log.d(" onBindViewHolder",position+"");
         Map optionMap = new HashMap();
         optionMap.put("blur",false);
+        ImgItem imgItem = arrayList.get(position);
 
-        picasso.with(this.viewContext)
-                .load("https://f4.bcbits.com/img/a2045320818_16.jpg")
-                .transform(new CustomTransformation(this.viewContext, 25,optionMap))
-                .into(holder.img);
+
+        String imgUrl = imgItem.getImgUrl();
+
+        //if(imgItem.getImgUrl() == null || imgItem.getImgUrl().equals("")){
+        if(imgUrl==null || imgUrl.equals("")){
+            picasso.with(this.viewContext)
+                    .load(R.drawable.dongas)
+                    .into(holder.img);
+        }else{
+            picasso.with(this.viewContext)
+                    .load(imgItem.getImgUrl())
+                    .transform(new CustomTransformation(this.viewContext, 100,optionMap))
+                    .into(holder.img);
+        }
+
+
+
+        if(imgItem.getImgUrl()==null || imgItem.getImgUrl().equals("") ){
+            picasso.with(this.viewContext)
+                    .load(R.drawable.dongas)
+                    .into(holder.img);
+        }else{
+
+
+        }
+
+
+
     }
 
     @Override

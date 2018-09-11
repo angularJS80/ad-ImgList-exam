@@ -5,8 +5,18 @@ package com.unbone.corp.imglisttry.dto;
  */
 
 public class ImgItem {
-    String imgUrl;
-    String imgSubject;
+    private String imgUrl;
+    private String imgSubject;
+    public ImgItem(){
+
+    }
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public String getImgSubject() {
+        return imgSubject;
+    }
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
@@ -15,4 +25,5 @@ public class ImgItem {
         this.imgSubject = imgSubject;
     }
 
-} 
+
+}
