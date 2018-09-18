@@ -40,7 +40,7 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewHolder>{
 
     public void setArrayList(ArrayList<ImgItem> arrayList) {
         this.arrayList = arrayList;
-        super.notifyDataSetChanged();
+        super.notifyDataSetChanged(); // 리사이클러뷰에 머가 바꼈는지 보라고 함
     }
 
 /*

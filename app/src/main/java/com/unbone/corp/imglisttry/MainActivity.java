@@ -90,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         fireBaseModel.setAdapter(recViewAdapter);
+        // 리사이클러 뷰에 사용중인 어뎁터를 파이어베이스에도 할당
         recView.setAdapter(recViewAdapter);
+        // 리사이클러 뷰에 어벧터 할당
 
 
 
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         holderImgItem.setImgUrl("https://f4.bcbits.com/img/a2045320818_16.jpg");
 
 
-        //fireBaseModel.addData(holderImgItem);
+        //fireBaseModel.addData(holderImgItem); // ImgItem 형태의 인스턴스를 파이어베이스에 등록
 
 
 
@@ -133,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         // 차주 설명
         //recView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
 
-        fireBaseModel.getImgList();
+        fireBaseModel.getImgList(); // 파이어베이스 감시자 실행 (목록에 표현 목적)
     }
 
 

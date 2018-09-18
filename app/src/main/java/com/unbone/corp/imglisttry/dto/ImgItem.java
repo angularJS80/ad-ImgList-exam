@@ -11,10 +11,10 @@ public class ImgItem {
     private String imgUrl;
     private String imgSubject;
 
-    private ArrayList<ImgItem> subImgItems;
+    private ArrayList<ImgItem> subImgItems; // ImgItem 과 동일한 형태의 복수형태(List)를 받아 들이기 위함
 
 
-    public ImgItem(){
+    public ImgItem(){ // 생성자 기본 (firebase 변환 용도로 필수 )
 
     }
 
