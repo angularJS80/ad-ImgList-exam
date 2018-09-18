@@ -2,6 +2,7 @@ package com.unbone.corp.imglisttry;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.ViewGroup;
@@ -15,8 +16,6 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     RecyclerView recView;
     RecViewAdapter recViewAdapter ;
-
-
     ArrayList<ImgItem> arrayList = new ArrayList();
 
 
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImgItem imgIitem = new ImgItem();
         imgIitem.setImgSubject("김화가 1작품");
-        imgIitem.setImgUrl("");
+        imgIitem.setImgUrl("https://f4.bcbits.com/img/a2045320818_16.jpg");
 
         arrayList.add(imgIitem);
 
@@ -75,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private String imgUplad(){
+        return "https://scontent-atl3-1.cdninstagram.com/vp/99061f6ca4b7e9bdec6170662c673cea/5C31CA43/t51.2885-15/e35/36476359_277119832866177_6778734062799421440_n.jpg";
+    }
 
     private void defineProc(){
 
@@ -83,23 +85,55 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-FireBaseModel fireBaseModel = new FireBaseModel();
-fireBaseModel.fireBaseNoneAuth();
+        FireBaseModel fireBaseModel = new FireBaseModel();
+        fireBaseModel.fireBaseNoneAuth();
 
-ImgItem imgItem = new ImgItem();
-        imgItem.setImgUrl("http://123456.jpg");
-        imgItem.setImgSubject("artist0101");
-        fireBaseModel.addData(imgItem);
 
-fireBaseModel.getImgList();
+        fireBaseModel.setAdapter(recViewAdapter);
+        recView.setAdapter(recViewAdapter);
 
-        recView.setAdapter(
-                recViewAdapter
-        );
 
+
+
+        ArrayList<ImgItem> imgItems = new ArrayList<ImgItem>();
+
+
+
+
+        ImgItem sliderImgItem = new ImgItem();
+        sliderImgItem.setImgUrl(imgUplad());
+        sliderImgItem.setImgSubject("artist0101");
+        imgItems.add(sliderImgItem);
+
+
+
+
+        sliderImgItem = new ImgItem();
+        sliderImgItem.setImgUrl("https://scontent-atl3-1.cdninstagram.com/vp/463bc7edc3a9cb9acf71624bdecdfabf/5C29820C/t51.2885-15/e35/36465708_2311560175526971_4252103896048074752_n.jpg");
+        sliderImgItem.setImgSubject("artist0101");
+        imgItems.add(sliderImgItem);
+
+        sliderImgItem = new ImgItem();
+        sliderImgItem.setImgUrl("https://scontent-atl3-1.cdninstagram.com/vp/ae82c4ac4f5681bc95ae944cdc7c43d7/5C2256E8/t51.2885-15/e35/36160964_194219044621710_4092911281114185728_n.jpg");
+        sliderImgItem.setImgSubject("artist0101");
+        imgItems.add(sliderImgItem);
+
+        ImgItem holderImgItem = new ImgItem();
+        holderImgItem.setSubImgItems(imgItems);
+        holderImgItem.setImgSubject("artist0101");
+        holderImgItem.setImgUrl("https://f4.bcbits.com/img/a2045320818_16.jpg");
+
+
+        //fireBaseModel.addData(holderImgItem);
+
+
+
+
+        //recView.setLayoutManager(new LinearLayoutManager(this));
         // 차주 설명
-        recView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        //recView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL));
 
+        fireBaseModel.getImgList();
     }
 
 

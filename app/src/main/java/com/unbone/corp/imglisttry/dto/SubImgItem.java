@@ -1,24 +1,20 @@
 package com.unbone.corp.imglisttry.dto;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Created by yongbeom on 2018. 8. 6..
+ * Created by yongbeom on 2018. 9. 15..
  */
 
-public class ImgItem {
+class SubImgItem {
     private String imgUrl;
     private String imgSubject;
 
-    private ArrayList<ImgItem> subImgItems;
 
 
-    public ImgItem(){
+    public SubImgItem(){
 
     }
-
-
     public String getImgUrl() {
         return imgUrl;
     }
@@ -34,10 +30,5 @@ public class ImgItem {
         this.imgSubject = imgSubject;
     }
 
-    public ArrayList<ImgItem> getSubImgItems() {
-        return subImgItems;
-    }
-    public void setSubImgItems(ArrayList<ImgItem> subImgItems) {
-        this.subImgItems = subImgItems;
-    }
+
 }

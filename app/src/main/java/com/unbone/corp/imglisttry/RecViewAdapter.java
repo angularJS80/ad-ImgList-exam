@@ -2,12 +2,18 @@ package com.unbone.corp.imglisttry;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+//import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 import com.unbone.corp.imglisttry.dto.ImgItem;
@@ -15,6 +21,7 @@ import com.unbone.corp.imglisttry.dto.RecViewHolder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +40,7 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewHolder>{
 
     public void setArrayList(ArrayList<ImgItem> arrayList) {
         this.arrayList = arrayList;
+        super.notifyDataSetChanged();
     }
 
 /*
@@ -84,7 +92,6 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewHolder>{
 
         RecViewHolder viewHolder = new RecViewHolder(itmeView);
 
-
         picasso = new  Picasso.Builder(viewContext)
                 .memoryCache(new LruCache(24000))
                 .build();
@@ -92,43 +99,15 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewHolder>{
         return viewHolder;
     }
 
-
-
-
-
-
-
-
-
-/*
-
     @Override
-    public MoviViewHolder onCreateViewHolder22(ViewGroup parent, int viewType) {
-
-        this.viewContext = parent.getContext();
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.movi_item, parent, false);
-        MoviViewHolder viewHolder = new MoviViewHolder(v);
-
-        picasso = new  Picasso.Builder(viewContext)
-                .memoryCache(new LruCache(24000))
-                .build();
-
-        return viewHolder;
-
-    }
-*/
-
-
-    @Override
-    public void onBindViewHolder(RecViewHolder holder, int position) {
+    public void onBindViewHolder(final RecViewHolder holder, int position) {
         Log.d(" onBindViewHolder",position+"");
         Map optionMap = new HashMap();
         optionMap.put("blur",false);
-        ImgItem imgItem = arrayList.get(position);
+        ImgItem holderImgItem = arrayList.get(position);
+        holder.subject.setText(holderImgItem.getImgSubject());
 
-
-        String imgUrl = imgItem.getImgUrl();
+        /*String imgUrl = imgItem.getImgUrl();
 
         //if(imgItem.getImgUrl() == null || imgItem.getImgUrl().equals("")){
         if(imgUrl==null || imgUrl.equals("")){
@@ -140,20 +119,49 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewHolder>{
                     .load(imgItem.getImgUrl())
                     .transform(new CustomTransformation(this.viewContext, 100,optionMap))
                     .into(holder.img);
+        }*/
+
+        if(holderImgItem.getSubImgItems()!=null){
+            List<ImgItem> sliderImgItems = holderImgItem.getSubImgItems();
+
+            for(int i=0;i<holderImgItem.getSubImgItems().size();i++){
+                ImgItem sliderImgItem =  sliderImgItems.get(i);
+
+
+
+                TextSliderView textSliderView = new TextSliderView(this.viewContext);
+                textSliderView
+                        .description(sliderImgItem.getImgSubject())
+                        .image(sliderImgItem.getImgUrl())
+                        .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                            @Override
+                            public void onSliderClick(BaseSliderView slider) {
+                               // Toast.makeText(viewContext, "", Toast.LENGTH_SHORT).show();
+                               // holder.sliderLayout.getScrollBarSize();
+
+                                //holder.sliderLayout.setCurrentPosition( holder.sliderLayout.getScrollBarSize()-1);
+
+                                //holder.sliderLayout.startAutoCycle();
+                                //holder.sliderLayout.stopAutoCycle();
+
+                                //Log.d("currentPos",""+holder.sliderLayout.getCurrentPosition());
+
+                                //holder.sliderLayout.moveNextPosition();
+
+
+                            }
+                        });
+
+                textSliderView.bundle(new Bundle());
+                textSliderView.getBundle()
+                        .putString("extra",String.valueOf(i));
+
+                holder.sliderLayout.addSlider(textSliderView);
+
+
+            }
+            holder.sliderLayout.stopAutoCycle();
         }
-
-
-
-        if(imgItem.getImgUrl()==null || imgItem.getImgUrl().equals("") ){
-            picasso.with(this.viewContext)
-                    .load(R.drawable.dongas)
-                    .into(holder.img);
-        }else{
-
-
-        }
-
-
 
     }
 
