@@ -141,6 +141,7 @@ public class FireBaseModel {
         databaseReference.child("imgList").child("subImgItems").push().setValue(sliderImgItem);
     }
 
+    /*네이밍 변경 필요 startImgListSubscribe*/
     public void getImgList() {
         databaseReference.child("imgList").addValueEventListener(valueEventListener);
     }
